@@ -15,7 +15,7 @@ Mod2 PROC C
     mov ESI,[EBX]       ; Arr address
     mov EDI,[EBX+4]     ; E address
     
-    lp1 movsd
+    lp1: movsd
     loop lp1
     
     

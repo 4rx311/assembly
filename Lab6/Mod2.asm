@@ -12,8 +12,9 @@ Mod2 PROC C
     push EDI
     
     mov ECX, 4          ; count
-    mov ESI,[EBX]       ; Arr address
-    mov EDI,[EBX+4]     ; E address
+    mov EAX,[EBX*4]
+    mov ESI,[eax*4]       ; Arr address
+    mov EDI,[eax*4+4]     ; E address
     
     lp1: movsd
     loop lp1

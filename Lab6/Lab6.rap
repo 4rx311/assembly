@@ -79,7 +79,7 @@ MilestoneOnTime=2
 MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
-MilestoneOnDateDate=31
+MilestoneOnDateDate=4
 MilestoneOnDateTimeYear=2018
 MilestoneOnDateTimeMonth=5
 MilestoneOnDateTimeDate=31
@@ -118,10 +118,10 @@ ProductVer4Range=0
 1004=
 1003=
 [Size]
-1=0,0,651,788,2822
+1=0,0,651,788,2942
 1001=410,4,516,647,47
 3=
-1002=646,0,723,586,288
+1002=423,-16,723,586,323
 1004=0,0,1172,555,72
 1003=838,8,535,555,81
 [BookMark]

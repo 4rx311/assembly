@@ -5,16 +5,18 @@ OPTION CASEMAP:NONE
 .CODE
 Mod2 PROC C
     ;Saving registers
+    ;Invoke StdOut,ADDR requestL
     push EAX
     push ECX
     push ESI
     push EDI
     
     mov ECX, 4          ; count
-    mov ESI,[EBX]       ; Arr adress
-    mov EDI,[EBX+4]     ; E adress
+    mov ESI,[EBX]       ; Arr address
+    mov EDI,[EBX+4]     ; E address
     
-    rep movsd
+    lp1 movsd
+    loop lp1
     
     
     ;Duplication of array

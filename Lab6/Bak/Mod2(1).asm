@@ -15,7 +15,8 @@ Mod2 PROC C
     mov ESI,[EBX]       ; Arr address
     mov EDI,[EBX+4]     ; E address
     
-    rep movsd
+    lp1: movsd
+    loop lp1
     
     
     ;Duplication of array

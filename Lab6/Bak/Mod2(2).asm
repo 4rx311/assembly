@@ -12,10 +12,11 @@ Mod2 PROC C
     push EDI
     
     mov ECX, 4          ; count
-    mov ESI,[EBX]       ; Arr adress
-    mov EDI,[EBX+4]     ; E adress
+    mov ESI,[EBX+4]       ; Arr address
+    mov EDI,[EBX+8]     ; E address
     
-    rep movsd
+    lp1: movsd
+    loop lp1
     
     
     ;Duplication of array

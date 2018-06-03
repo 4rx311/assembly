@@ -13,7 +13,7 @@ IncludeLib masm32.lib
 .CONST
 MsgExit  DB    "Press Enter to Exit",0AH,0DH,0
 string1 DB 10 dup (?); There is we will be save a text values
-string2 DB ' ',13,10,0
+string2 DB 'xaxa',13,10,0
 
 ;MsgNextLine DB "", 0AH, 0DH, 0
 
@@ -53,7 +53,7 @@ Tabl DWORD 2 dup (?)
          .CODE
 Start:
          ; Input
-         Invoke StdOut,ADDR reqIN
+         ;Invoke StdOut,ADDR reqIN
         ; Invoke StdIn,ADDR buffer,LengthOf buffer
         ; Invoke StripLF,ADDR buffer           
          ;Invoke atol, ADDR buffer
@@ -85,6 +85,7 @@ Case2:
          
          call Mod2
          mov eax,E
+         mov ebx,0
          jmp print_mas
          jmp Finish
 

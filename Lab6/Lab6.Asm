@@ -13,7 +13,7 @@ IncludeLib masm32.lib
 .CONST
 MsgExit  DB    "Press Enter to Exit",0AH,0DH,0
 string1 DB 10 dup (?); There is we will be save a text values
-string2 DB ' ',13,10,0
+string2 DB 'xaxa',13,10,0
 
 ;MsgNextLine DB "", 0AH, 0DH, 0
 
@@ -30,7 +30,7 @@ S SDWORD 2
 D SDWORD 4
 E SDWORD 16 dup (?)
 
-Arr SDWORD  2,5,4,2, 3,7,6,3
+Arr SDWORD  2,5,4,2,3,7,6,3
 Count DWORD 8
 
 
@@ -129,8 +129,8 @@ testend:                    ; test end of string
          ;call Mod4
          
 print_mas:  mov ECX,2;Becausr we have 2 strings
-            cycle1: push ECX
-                    mov ECX,4;Because in 1 string we have 4 valuations
+            push ECX
+            cycle1: mov ECX,4;Because in 1 string we have 4 valuations
                     push ecx
                     
                     mov EAX,E[EBX*4]

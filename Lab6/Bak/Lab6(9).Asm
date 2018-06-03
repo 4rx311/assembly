@@ -12,7 +12,9 @@ IncludeLib masm32.lib
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 .CONST
 MsgExit  DB    "Press Enter to Exit",0AH,0DH,0
-resstr DB 10 dup (?)
+string1 DB 10 dup (?); There is we will be save a text values
+string2 DB ' ',13,10,0
+
 ;MsgNextLine DB "", 0AH, 0DH, 0
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -83,6 +85,7 @@ Case2:
          
          call Mod2
          mov eax,E
+         jmp print_mas
          jmp Finish
 
 Case3:
@@ -125,7 +128,22 @@ testend:                    ; test end of string
          ;call Mod4
          
 print_mas:  mov ECX,2;Becausr we have 2 strings
-            
+            cycle1: push ECX
+                    mov ECX,4;Because in 1 string we have 4 valuations
+                    push ecx
+                    
+                    mov EAX,E[EBX*4]
+                    push EBX
+                    invoke dwtoa,eax,arrd string1
+                    invoke StdOut,addr string1
+                    pop ebx
+                    inc ebx
+                    pop ecx
+                    loop cycle1
+           pop ecx
+           invoke StdOut,addr string2
+           loop print_mas
+           jmp Finish
 
 Finish:
          

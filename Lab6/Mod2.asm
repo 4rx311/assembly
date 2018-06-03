@@ -15,8 +15,8 @@ Mod2 PROC C
     mov ESI,[EBX]       ; Arr address
     mov EDI,[EBX+4]     ; E address
     
-    
-    rep movsd
+    lp1: movsd
+    loop lp1
     
     
     ;Duplication of array
@@ -38,10 +38,10 @@ Mod2 PROC C
     ;mov [EDI + 28], EAX             ;E[8] = EAX
     
     ;Restoring registers
-    pop EAX
-    pop ECX
-    pop ESI
     pop EDI
+    pop ESI
+    pop ECX
+    pop EAX
 
 Mod2 endp
 end

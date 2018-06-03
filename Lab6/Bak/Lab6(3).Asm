@@ -23,7 +23,8 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-;Str     DB 'killallvowels', 0
+Str1     byte "killallvowels!"
+str2    byte 14 dup (?)
 
 B SDWORD 5
 S SDWORD 2
@@ -99,17 +100,41 @@ Case3:;----------------------------------------------
          call Mod3
          mov E,EAX
          
- %ifdef        
-         lea EBX, Arr
-         push EBX
-         lea EBX, E
-         push EBX
-         
-         call Mod3
- %endif
          jmp Finish        
         
 Case4:;----------------------------------------------
+            mov ecx,13
+            cld
+            lea esi,Str1
+            
+            
+            loop_find:  lodsb
+                        cmp eax,'e'
+                        je change
+                        cmp eax,'y'
+                        je change
+                        cmp eax,'u'
+                        je change
+                        cmp eax,'i'
+                        je change
+                        cmp eax,'o'
+                        je change 
+                        cmp eax,'a'
+                        je change
+                        loop loop_find
+                        mov EAX,0
+                      ;  mov EAX,Str1
+                        mov E,EAX
+                        
+                       ; invoke dwtoa, str1, addr Str1
+                        invoke StdOut,addr Str1
+                        jmp Finish
+
+change: mov Str1[ESI],'-'
+        dec ecx
+        jmp loop_find                                                                                                                     
+                        
+            
 ;         xor EAX, EAX
 ;         lea ESI, Str       ; our string address
 ;         lea EDI, E         ; result string address
@@ -140,6 +165,7 @@ testend:                    ; test end of string
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         
 print_mas:  mov ECX,2;Becausr we have 2 strings
+            
             cycle1: push ECX
                     mov ECX,4;Because in 1 string we have 4 valuations
                     push ecx
@@ -151,7 +177,8 @@ print_mas:  mov ECX,2;Becausr we have 2 strings
                     pop ebx
                     inc ebx
                     pop ecx
-                    loop cycle1
+                loop cycle1
+           
            pop ecx
            invoke StdOut,addr string2
            loop print_mas

@@ -30,7 +30,7 @@ S SDWORD 2
 D SDWORD 4
 E SDWORD 16 dup (?)
 
-Arr SDWORD  2,5,4,2, 3,7,6,3
+Arr SDWORD  2,5,4,2,3,7,6,3
 Count DWORD 8
 
 
@@ -53,13 +53,13 @@ Tabl DWORD 2 dup (?)
          .CODE
 Start:
          ; Input
-         Invoke StdOut,ADDR reqIN
-         Invoke StdIn,ADDR buffer,LengthOf buffer
-         Invoke StripLF,ADDR buffer           
-         Invoke atol, ADDR buffer
-         mov A, EAX  
+         ;Invoke StdOut,ADDR reqIN
+        ; Invoke StdIn,ADDR buffer,LengthOf buffer
+        ; Invoke StripLF,ADDR buffer           
+         ;Invoke atol, ADDR buffer
+       ;  mov A, EAX  
          
-         mov A,2
+         mov A,3
          cmp A, 1
          je Case1
          cmp A, 2
@@ -85,18 +85,26 @@ Case2:
          
          call Mod2
          mov eax,E
+         mov ebx,0
          jmp print_mas
          jmp Finish
 
 Case3:
          xor EAX, EAX
+         mov edx,4;we know that it is 5 elements
+         mov eax,Arr[edx*4]
+         mov ebx,B
+         mov ecx,D
+         call Mod3
          
+ %ifdef        
          lea EBX, Arr
          push EBX
          lea EBX, E
          push EBX
          
          call Mod3
+ %endif
          jmp Finish
          
 Case4:

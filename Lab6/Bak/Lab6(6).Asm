@@ -30,7 +30,7 @@ S SDWORD 2
 D SDWORD 4
 E SDWORD 16 dup (?)
 
-Arr SDWORD  2,5,4,2, 3,7,6,3
+Arr SDWORD  2,5,4,2,3,7,6,3
 Count DWORD 8
 
 
@@ -50,6 +50,7 @@ A SDWORD ?
 
 Tabl DWORD 2 dup (?)
 
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          .CODE
 Start:
          ; Input
@@ -59,7 +60,7 @@ Start:
          ;Invoke atol, ADDR buffer
        ;  mov A, EAX  
          
-         mov A,2
+         mov A,3
          cmp A, 1
          je Case1
          cmp A, 2
@@ -70,12 +71,12 @@ Start:
          je Case4
          jmp Finish
          
-Case1:
+Case1:;----------------------------------------------
          xor EAX, EAX
          call Mod1
          jmp Finish
          
-Case2:
+Case2:;----------------------------------------------
          xor EAX, EAX
          xor EBX, EBX
          
@@ -85,48 +86,59 @@ Case2:
          
          call Mod2
          mov eax,E
+         mov ebx,0
          jmp print_mas
          jmp Finish
 
-Case3:
+Case3:;----------------------------------------------
          xor EAX, EAX
+         mov edx,4;we know that it is 5 elements
+         mov eax,Arr[edx*4]
+         mov ebx,B
+         mov ecx,S
+         call Mod3
+         mov E,EAX
          
+ %ifdef        
          lea EBX, Arr
          push EBX
          lea EBX, E
          push EBX
          
          call Mod3
-         jmp Finish
-         
-Case4:
-         xor EAX, EAX
-  ;       lea ESI, Str       ; our string address
-         lea EDI, E         ; result string address
+ %endif
+         jmp Finish        
+        
+Case4:;----------------------------------------------
+;         xor EAX, EAX
+;         lea ESI, Str       ; our string address
+;         lea EDI, E         ; result string address
 
-compare:                    ; compare
-         cmpsb              ; compare byte from ESI, with byte from EDI
-         je check           ; if true -> state3
-         mov EAX, [ESI+4]   ; else, write to result
-         mov [EDI+4], EAX
-         jmp testend
+compare:                    
+;         cmpsb              ; compare byte from ESI, with byte from EDI
+;         je check           ; if true -> state3
+;         mov EAX, [ESI+4]   ; else, write to result
+;         mov [EDI+4], EAX
+;         jmp testend
          
 increm:  
-         inc ESI            ; ESI ++ - moving to the next 
+;         inc ESI            ; ESI ++ - moving to the next 
          
 check:
 ;         cmp [ESI], 20h
-         je increm
+;         je increm
     
 
 testend:                    ; test end of string
- ;        cmp [ESI+4], 0
-         je Finish
-         jmp compare
+;        cmp [ESI+4], 0
+;         je Finish
+;         jmp compare
          
          
          ;call Mod4
-         
+
+
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         
 print_mas:  mov ECX,2;Becausr we have 2 strings
             cycle1: push ECX
                     mov ECX,4;Because in 1 string we have 4 valuations

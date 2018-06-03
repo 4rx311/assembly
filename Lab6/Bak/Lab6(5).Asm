@@ -23,8 +23,8 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1     byte 'killallvowels!'
-str2    byte 14 dup (?)
+Str1     byte 'iillallvowels!',13,10,0
+Str2    byte 14 dup (?)
 
 B SDWORD 5
 S SDWORD 2
@@ -106,24 +106,28 @@ Case3:;----------------------------------------------
 Case4:;----------------------------------------------
             mov ecx,13
             cld
-            lea esi,Str1
-            
-            
+            lea si,Str1
+            lea di,E
+            ;mov EBX,0
             loop_find:  lodsb
                         cmp ax,'e'
                         je change
-                        cmp ax,'y'
+                        cmp al,'y'
                         je change
-                        cmp ax,'u'
+                        cmp al,'u'
                         je change
-                        cmp ax,'i'
+                        cmp al,'i'
                         je change
-                        cmp ax,'o'
+                        cmp al,'o'
                         je change 
-                        cmp ax,'a'
+                        cmp al,'a'
                         je change
+               cont:    stosb
+                   ;inc edi
+                        ;mov Str2,ax
+                        ;invoke StdOut, addr Eax
                         loop loop_find
-                        mov AX,0
+                       ; mov AX,0
                       ;  mov EAX,Str1
                         ;æmov E,AX
                         
@@ -131,10 +135,13 @@ Case4:;----------------------------------------------
                         invoke StdOut,addr Str1
                         jmp Finish
 
-change: mov Str1[ESI],'0'
-        dec ecx
-        jmp loop_find                                                                                                                     
-                        
+change: ;mov Str1[ESI],'-'
+        ;dec ecx
+        mov al,'-'
+        ;stosb
+        ;jmp loop_find
+        jmp cont                                                                                                                     
+                  
             
 ;         xor EAX, EAX
 ;         lea ESI, Str       ; our string address

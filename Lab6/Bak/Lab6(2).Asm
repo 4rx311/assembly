@@ -23,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1     byte "killallvowels!"
+Str1     byte 'killallvowels!'
 str2    byte 14 dup (?)
 
 B SDWORD 5
@@ -107,25 +107,25 @@ Case4:;----------------------------------------------
             mov ecx,13
             cld
             lea esi,Str1
-            
-            
+            lea edi,E
+            ;mov EBX,0
             loop_find:  lodsb
-                        cmp eax,'e'
+                        cmp ax,'e'
                         je change
-                        cmp eax,'y'
+                        cmp ax,'y'
                         je change
-                        cmp eax,'u'
+                        cmp ax,'u'
                         je change
-                        cmp eax,'i'
+                        cmp ax,'i'
                         je change
-                        cmp eax,'o'
+                        cmp ax,'o'
                         je change 
-                        cmp eax,'a'
+                        cmp ax,'a'
                         je change
                         loop loop_find
-                        mov EAX,0
+                        mov AX,0
                       ;  mov EAX,Str1
-                        mov E,EAX
+                        ;æmov E,AX
                         
                        ; invoke dwtoa, str1, addr Str1
                         invoke StdOut,addr Str1
@@ -190,7 +190,7 @@ Finish:
          ; Output
          Invoke dwtoa,E,ADDR resstr
          ;Invoke StdOut,ADDR resstr
-         Invoke StdOut,ADDR reqOUT
+         Invoke StdOut,ADDR Str1
          
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          XOR    EAX,EAX

@@ -17,7 +17,7 @@ Mod2 PROC C
     rep movsd
     
     
-    ;Duplication of array - shit!
+    ;Duplication of array
     ;xor EAX, EAX
     ;mov ESI, [EBX + 4]      ;ESI = Arr adress
     ;mov EDI, [EBX + 8]      ;EDI = E adress

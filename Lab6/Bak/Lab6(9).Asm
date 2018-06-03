@@ -12,6 +12,7 @@ IncludeLib masm32.lib
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 .CONST
 MsgExit  DB    "Press Enter to Exit",0AH,0DH,0
+resstr DB 10 dup (?)
 ;MsgNextLine DB "", 0AH, 0DH, 0
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -20,7 +21,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str     DB 'killallvowels', 0xa
+;Str     DB 'killallvowels', 0
 
 B SDWORD 5
 S SDWORD 2
@@ -56,6 +57,7 @@ Start:
          Invoke atol, ADDR buffer
          mov A, EAX  
          
+         mov A,2
          cmp A, 1
          je Case1
          cmp A, 2
@@ -80,6 +82,7 @@ Case2:
          mov EBX, offset Tabl
          
          call Mod2
+         mov eax,E
          jmp Finish
 
 Case3:
@@ -95,13 +98,35 @@ Case3:
          
 Case4:
          xor EAX, EAX
+  ;       lea ESI, Str       ; our string address
+         lea EDI, E         ; result string address
+
+compare:                    ; compare
+         cmpsb              ; compare byte from ESI, with byte from EDI
+         je check           ; if true -> state3
+         mov EAX, [ESI+4]   ; else, write to result
+         mov [EDI+4], EAX
+         jmp testend
          
-          
+increm:  
+         inc ESI            ; ESI ++ - moving to the next 
+         
+check:
+;         cmp [ESI], 20h
+         je increm
+    
+
+testend:                    ; test end of string
+ ;        cmp [ESI+4], 0
+         je Finish
+         jmp compare
          
          
          ;call Mod4
-         jmp Finish
          
+print_mas:  mov ECX,2;Becausr we have 2 strings
+            
+
 Finish:
          
          ; Output

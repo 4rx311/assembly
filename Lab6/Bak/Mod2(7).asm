@@ -11,16 +11,17 @@ Mod2 PROC C
     push EDI
     
     
-    mov ESI, [EBX]
-    mov EDI, [EBX + 4]
-    mov ECX, 4
+    mov ESI,[EBX]       ; Arr adress
+    mov EDI,[EBX+4]     ; E adress
+
+    mov ECX, 4          ; count
     
     cycle:
     movsd
     loop cycle
     
     
-    ;Making duplication of array
+    ;Making duplication of array - shit!
     ;xor EAX, EAX
     ;mov ESI, [EBX + 4]      ;ESI = Arr adress
     ;mov EDI, [EBX + 8]      ;EDI = E adress

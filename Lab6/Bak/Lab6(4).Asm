@@ -12,6 +12,9 @@ IncludeLib masm32.lib
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 .CONST
 MsgExit  DB    "Press Enter to Exit",0AH,0DH,0
+string1 DB 10 dup (?); There is we will be save a text values
+string2 DB ' ',13,10,0
+
 ;MsgNextLine DB "", 0AH, 0DH, 0
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -20,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str     DB 'killallvowels', 0
+;Str     DB 'killallvowels', 0
 
 B SDWORD 5
 S SDWORD 2
@@ -56,6 +59,7 @@ Start:
          Invoke atol, ADDR buffer
          mov A, EAX  
          
+         mov A,2
          cmp A, 1
          je Case1
          cmp A, 2
@@ -80,6 +84,8 @@ Case2:
          mov EBX, offset Tabl
          
          call Mod2
+         mov eax,E
+         jmp print_mas
          jmp Finish
 
 Case3:
@@ -95,7 +101,7 @@ Case3:
          
 Case4:
          xor EAX, EAX
-         lea ESI, str1      ; our string address
+  ;       lea ESI, Str       ; our string address
          lea EDI, E         ; result string address
 
 compare:                    ; compare
@@ -109,17 +115,35 @@ increm:
          inc ESI            ; ESI ++ - moving to the next 
          
 check:
-         cmp [ESI], 20h
+;         cmp [ESI], 20h
          je increm
     
 
 testend:                    ; test end of string
-         cmp [ESI+4], 0
+ ;        cmp [ESI+4], 0
          je Finish
          jmp compare
          
          
          ;call Mod4
+         
+print_mas:  mov ECX,2;Becausr we have 2 strings
+            cycle1: push ECX
+                    mov ECX,4;Because in 1 string we have 4 valuations
+                    push ecx
+                    
+                    mov EAX,E[EBX*4]
+                    push EBX
+                    invoke dwtoa,eax,addr string1
+                    invoke StdOut,addr string1
+                    pop ebx
+                    inc ebx
+                    pop ecx
+                    loop cycle1
+           pop ecx
+           invoke StdOut,addr string2
+           loop print_mas
+           jmp Finish
 
 Finish:
          

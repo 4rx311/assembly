@@ -53,7 +53,7 @@ Tabl DWORD 2 dup (?)
          .CODE
 Start:
          ; Input
-         Invoke StdOut,ADDR reqIN
+         ;Invoke StdOut,ADDR reqIN
         ; Invoke StdIn,ADDR buffer,LengthOf buffer
         ; Invoke StripLF,ADDR buffer           
          ;Invoke atol, ADDR buffer
@@ -85,6 +85,7 @@ Case2:
          
          call Mod2
          mov eax,E
+         mov ebx,0
          jmp print_mas
          jmp Finish
 

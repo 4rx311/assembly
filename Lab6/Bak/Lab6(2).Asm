@@ -13,7 +13,7 @@ IncludeLib masm32.lib
 .CONST
 MsgExit  DB    "Press Enter to Exit",0AH,0DH,0
 string1 DB 10 dup (?); There is we will be save a text values
-string2 DB 'xaxa',13,10,0
+string2 DB ' ',13,10,0
 
 ;MsgNextLine DB "", 0AH, 0DH, 0
 
@@ -30,7 +30,7 @@ S SDWORD 2
 D SDWORD 4
 E SDWORD 16 dup (?)
 
-Arr SDWORD  2,5,4,2, 3,7,6,3
+Arr SDWORD  2,5,4,2,3,7,6,3
 Count DWORD 8
 
 
@@ -59,7 +59,7 @@ Start:
          ;Invoke atol, ADDR buffer
        ;  mov A, EAX  
          
-         mov A,2
+         mov A,3
          cmp A, 1
          je Case1
          cmp A, 2
@@ -91,13 +91,20 @@ Case2:
 
 Case3:
          xor EAX, EAX
+         mov edx,4;we know that it is 5 elements
+         mov eax,Arr[edx*4]
+         mov ebx,B
+         mov ecx,D
+         call Mod3
          
+ %ifdef        
          lea EBX, Arr
          push EBX
          lea EBX, E
          push EBX
          
          call Mod3
+ %endif
          jmp Finish
          
 Case4:

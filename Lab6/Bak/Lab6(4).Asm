@@ -85,18 +85,26 @@ Case2:
          
          call Mod2
          mov eax,E
+         mov ebx,0
          jmp print_mas
          jmp Finish
 
 Case3:
          xor EAX, EAX
+         mov edx,4;we know that it is 5 elements
+         mov eax,Arr[edx*4]
+         mov ebx,B
+         mov ecx,D
+         call Mod3
          
+ %ifdef        
          lea EBX, Arr
          push EBX
          lea EBX, E
          push EBX
          
          call Mod3
+ %endif
          jmp Finish
          
 Case4:

@@ -54,10 +54,10 @@ Tabl DWORD 2 dup (?)
 Start:
          ; Input
          Invoke StdOut,ADDR reqIN
-         Invoke StdIn,ADDR buffer,LengthOf buffer
-         Invoke StripLF,ADDR buffer           
-         Invoke atol, ADDR buffer
-         mov A, EAX  
+        ; Invoke StdIn,ADDR buffer,LengthOf buffer
+        ; Invoke StripLF,ADDR buffer           
+         ;Invoke atol, ADDR buffer
+       ;  mov A, EAX  
          
          mov A,2
          cmp A, 1

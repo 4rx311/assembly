@@ -28,3 +28,4 @@ Mod3 PROC C
     ret 12                   ; return from proc
 
 Mod3 endp
+end

@@ -59,7 +59,7 @@ Start:
          ;Invoke atol, ADDR buffer
        ;  mov A, EAX  
          
-         mov A,2
+         mov A,3
          cmp A, 1
          je Case1
          cmp A, 2
@@ -91,13 +91,20 @@ Case2:
 
 Case3:
          xor EAX, EAX
+         mov edx,4;we know that it is 5 elements
+         mov eax,Arr[edx*4]
+         mov ebx,B
+         mov ecx,D
+         call Mod3
          
+ %ifdef        
          lea EBX, Arr
          push EBX
          lea EBX, E
          push EBX
          
          call Mod3
+ %endif
          jmp Finish
          
 Case4:

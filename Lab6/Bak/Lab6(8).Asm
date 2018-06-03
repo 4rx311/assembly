@@ -54,12 +54,12 @@ Tabl DWORD 2 dup (?)
 Start:
          ; Input
          Invoke StdOut,ADDR reqIN
-         Invoke StdIn,ADDR buffer,LengthOf buffer
-         Invoke StripLF,ADDR buffer           
-         Invoke atol, ADDR buffer
-         mov A, EAX  
+        ; Invoke StdIn,ADDR buffer,LengthOf buffer
+        ; Invoke StripLF,ADDR buffer           
+         ;Invoke atol, ADDR buffer
+       ;  mov A, EAX  
          
-         mov A,2
+         æmov A,2
          cmp A, 1
          je Case1
          cmp A, 2
@@ -134,7 +134,7 @@ print_mas:  mov ECX,2;Becausr we have 2 strings
                     
                     mov EAX,E[EBX*4]
                     push EBX
-                    invoke dwtoa,eax,arrd string1
+                    invoke dwtoa,eax,addr string1
                     invoke StdOut,addr string1
                     pop ebx
                     inc ebx

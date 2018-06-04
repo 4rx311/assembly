@@ -5,17 +5,24 @@ OPTION CASEMAP:NONE
 .CODE
 Mod2 PROC C
     ;Saving registers
-    Invoke StdOut,ADDR requestL
+    ;Invoke StdOut,ADDR requestL
+%ifdef    
     push EAX
     push ECX
     push ESI
     push EDI
+    %endif
     
     mov ECX, 4          ; count
-    mov ESI,[EBX]       ; Arr adress
-    mov EDI,[EBX+4]     ; E adress
+    ;mov ESI,[EBX]       ; Arr address
+    ;mov EDI,[EBX+4]     ; E address
+    lea esi,[ebx]
+    lea edi,[ebx+4]
     
-    rep movsd
+    loop1: movsd
+    loop loop1
+    
+    ;rep movsd
     
     
     ;Duplication of array
@@ -36,11 +43,12 @@ Mod2 PROC C
     ;mov [EDI + 12], EAX             ;E[4] = EAX
     ;mov [EDI + 28], EAX             ;E[8] = EAX
     
-    ;Restoring registers
+ 
+ %ifdef   ;Restoring registers
     pop EAX
     pop ECX
     pop ESI
     pop EDI
-
+%endif
 Mod2 endp
 end

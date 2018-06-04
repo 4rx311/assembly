@@ -23,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1     byte 'iillallvowels!',13,10,0
+Str1     byte 'Killallvowels!',13,10,0
 Str2    byte 14 dup (?)
 
 B SDWORD 5
@@ -104,83 +104,84 @@ Case3:;----------------------------------------------
          jmp Finish        
         
 Case4:;----------------------------------------------
-            mov ecx,13
-            cld
-            lea esi,Str1
-            lea edi,E
-            ;mov EBX,0
-            loop_find:  lodsb
-                        cmp ax,'e'
-                        je change
-                        cmp ax,'y'
-                        je change
-                        cmp ax,'u'
-                        je change
-                        cmp ax,'i'
-                        je change
-                        cmp ax,'o'
-                        je change 
-                        cmp ax,'a'
-                        je change
-               cont:    stosb
-                   ;inc edi
-                        ;mov Str2,ax
-                        invoke StdOut, addr ax
-                        loop loop_find
-                       ; mov AX,0
-                      ;  mov EAX,Str1
-                        ;æmov E,AX
+         mov ECX,13
+         cld
+         lea ESI,Str1
+         lea EDI,E
+         
+loop_find:  
+         lodsb
+         cmp ax,'e'
+         je change
+         cmp ax,'y'
+         je change
+         cmp ax,'u'
+         je change
+         cmp ax,'i'
+         je change
+         cmp ax,'o'
+         je change 
+         cmp ax,'a'
+         je change
+         
+         cont:
+            stosb
+         push ECX
+         invoke dwtoa, eax, addr Str2
+         invoke StdOut, addr Str2
+         pop ECX
+    loop loop_find
                         
-                       ; invoke dwtoa, str1, addr Str1
-                        invoke StdOut,addr Str1
-                        jmp Finish
+        ;invoke StdOut,addr Str1
+jmp Finish
 
-change: ;mov Str1[ESI],'-'
-        ;dec ecx
+change: 
         mov ax,'-'
         ;stosb
-        ;jmp loop_find
-        jmp cont                                                                                                                     
-                  
-            
-;         xor EAX, EAX
-;         lea ESI, Str       ; our string address
-;         lea EDI, E         ; result string address
+        jmp cont 
+                                                                                                                            
+CaseN:;----------------------------------------------                  
+%ifdef            
+         xor EAX, EAX
+         lea ESI, Str1      ; our string address
+         lea EDI, E         ; result string address
 
 compare:                    
-;         cmpsb              ; compare byte from ESI, with byte from EDI
-;         je check           ; if true -> state3
-;         mov EAX, [ESI+4]   ; else, write to result
-;         mov [EDI+4], EAX
-;         jmp testend
+         cmpsb              ; compare byte from ESI, with byte from EDI
+         je check           ; if true -> state3
+         mov EAX, [ESI+4]   ; else, write to result
+         mov [EDI+4], EAX
+         jmp testend
          
 increm:  
-;         inc ESI            ; ESI ++ - moving to the next 
-         
-check:
-;         cmp [ESI], 20h
-;         je increm
+         inc ESI            ; ESI ++ - moving to the next 
+         invoke StdOut,addr Str1
+check:   
+         mov EAX, [ESI]
+         cmp EAX, 'a'
+         je increm
     
 
 testend:                    ; test end of string
-;        cmp [ESI+4], 0
-;         je Finish
-;         jmp compare
+         mov EAX, [ESI+4]
+         cmp EAX, '!'
+         je Finish
+         jmp compare
          
          
          ;call Mod4
-
+%endif
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         
 print_mas:  mov ECX,2;Becausr we have 2 strings
             
             cycle1: push ECX
-                    mov ECX,4;Because in 1 string we have 4 valuations
-                    push ecx
+                    mov ECX,4    ; Because in 1 string we have 4 valuations
+                    push ECX
                     
                     mov EAX,E[EBX*4]
                     push EBX
-                    invoke dwtoa,eax,addr string1
+                    ;invoke dwtoa,EAX,addr string1
                     invoke StdOut,addr string1
                     pop ebx
                     inc ebx
@@ -195,9 +196,7 @@ print_mas:  mov ECX,2;Becausr we have 2 strings
 Finish:
          
          ; Output
-         Invoke dwtoa,E,ADDR resstr
-         ;Invoke StdOut,ADDR resstr
-         Invoke StdOut,ADDR Str1
+         ;Invoke dwtoa,E,ADDR resstr
          
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          XOR    EAX,EAX

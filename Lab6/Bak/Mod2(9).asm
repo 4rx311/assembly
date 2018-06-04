@@ -15,9 +15,12 @@ Mod2 PROC C
     ;mov ESI,[EBX]       ; Arr address
     ;mov EDI,[EBX+4]     ; E address
     lea esi,[ebx]
-    lea edi,ebx+4
+    lea edi,[ebx+4]
     
-    rep movsd
+    loop: movsd
+    loop loop
+    
+    ;rep movsd
     
     
     ;Duplication of array

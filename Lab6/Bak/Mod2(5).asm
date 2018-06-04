@@ -6,7 +6,8 @@ OPTION CASEMAP:NONE
 Mod2 PROC C
     ;Saving registers
     ;Invoke StdOut,ADDR requestL
-%ifdef    push EAX
+%ifdef    
+    push EAX
     push ECX
     push ESI
     push EDI

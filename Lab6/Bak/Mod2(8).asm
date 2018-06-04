@@ -17,7 +17,10 @@ Mod2 PROC C
     lea esi,[ebx]
     lea edi,[ebx+4]
     
-    rep movsd
+    loop1: movsd
+    loop loop1
+    
+    ;rep movsd
     
     
     ;Duplication of array

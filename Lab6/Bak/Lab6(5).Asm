@@ -106,26 +106,29 @@ Case3:;----------------------------------------------
 Case4:;----------------------------------------------
             mov ecx,13
             cld
-            lea si,Str1
-            lea di,E
+            lea esi,Str1
+            lea edi,E
             ;mov EBX,0
             loop_find:  lodsb
                         cmp ax,'e'
                         je change
-                        cmp al,'y'
+                        cmp ax,'y'
                         je change
-                        cmp al,'u'
+                        cmp ax,'u'
                         je change
-                        cmp al,'i'
+                        cmp ax,'i'
                         je change
-                        cmp al,'o'
+                        cmp ax,'o'
                         je change 
-                        cmp al,'a'
+                        cmp ax,'a'
                         je change
                cont:    stosb
                    ;inc edi
                         ;mov Str2,ax
-                        ;invoke StdOut, addr Eax
+                        push ECX
+                        invoke dwtoa, eax, addr Str2
+                        invoke StdOut, addr Str2
+                        pop ECX
                         loop loop_find
                        ; mov AX,0
                       ;  mov EAX,Str1
@@ -137,7 +140,7 @@ Case4:;----------------------------------------------
 
 change: ;mov Str1[ESI],'-'
         ;dec ecx
-        mov al,'-'
+        mov ax,'-'
         ;stosb
         ;jmp loop_find
         jmp cont                                                                                                                     

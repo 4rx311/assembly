@@ -126,8 +126,8 @@ Case4:;----------------------------------------------
                    ;inc edi
                         ;mov Str2,ax
                         push ECX
-                        invoke dwtoa, eax, addr Str2
-                        invoke StdOut, addr Str2
+                        ;invoke dwtoa, ax, addr Str2
+                        invoke StdOut, addr eax
                         pop ECX
                         loop loop_find
                        ; mov AX,0

@@ -106,8 +106,8 @@ Case3:;----------------------------------------------
 Case4:;----------------------------------------------
             mov ecx,13
             cld
-            lea si,Str1
-            lea di,E
+            lea esi,Str1
+            lea edi,E
             ;mov EBX,0
             loop_find:  lodsb
                         cmp ax,'e'
@@ -124,8 +124,8 @@ Case4:;----------------------------------------------
                         je change
                cont:    stosb
                    ;inc edi
-                       ; mov Str2,Str1[ESI]
-                        invoke StdOut, addr eax
+                        ;mov Str2,ax
+                        invoke StdOut, addr ax
                         loop loop_find
                        ; mov AX,0
                       ;  mov EAX,Str1

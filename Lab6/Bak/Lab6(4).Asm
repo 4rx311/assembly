@@ -125,7 +125,10 @@ Case4:;----------------------------------------------
                cont:    stosb
                    ;inc edi
                         ;mov Str2,ax
-                        invoke StdOut, addr ax
+                        push ECX
+                        invoke dwtoa, ax, addr Str2
+                        invoke StdOut, addr Str2
+                        pop ECX
                         loop loop_find
                        ; mov AX,0
                       ;  mov EAX,Str1

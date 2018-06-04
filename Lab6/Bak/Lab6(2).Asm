@@ -124,9 +124,9 @@ Case4:;----------------------------------------------
                         je change
                cont:    stosb
                    ;inc edi
-                        ;mov Str2,ax
+                        mov Str2,ax
                         push ECX
-                        invoke dwtoa, ax, addr Str2
+                        ;invoke dwtoa, ax, addr Str2
                         invoke StdOut, addr Str2
                         pop ECX
                         loop loop_find

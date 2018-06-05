@@ -89,6 +89,7 @@ Case2:;----------------------------------------------
          call Mod2
          mov eax,E
          mov ebx,0
+         mov ecx,2
          jmp PrintArr
          jmp Finish
 
@@ -201,6 +202,7 @@ cycle1:
      
 PrintArr:
         xor EAX, EAX
+        push ecx
         mov ECX, 4             ; 2 columns
 cycle:
         push ECX
@@ -220,7 +222,8 @@ cycle:
         Invoke StdOut, ADDR nextstring              ;using it as /n
         pop Count
         dec Count
-        mov ECX, Count
+        ;mov ECX, Count
+        pop ecx
         loop PrintArr
         
 Finish:         

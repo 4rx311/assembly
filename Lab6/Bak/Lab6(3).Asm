@@ -24,6 +24,7 @@ buffer  DB 10 dup ('0')
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
 Str1    byte 'killallvowels!',13,10,0
+vowelsarr byte 'eyuioa'
 Str2    byte 14 dup (?)
 
 B SDWORD 5
@@ -89,6 +90,7 @@ Case2:;----------------------------------------------
          call Mod2
          mov eax,E
          mov ebx,0
+         mov ecx,2
          jmp PrintArr
          jmp Finish
 
@@ -104,35 +106,12 @@ Case3:;----------------------------------------------
          jmp Finish        
         
 Case4:;----------------------------------------------
-         mov ECX,13
-         cld
-         lea ESI,Str1
-         lea EDI,E
-         
-loop_find:  
-         lodsb
-         cmp ax,'e'
-         je change
-         cmp ax,'y'
-         je change
-         cmp ax,'u'
-         je change
-         cmp ax,'i'
-         je change
-         cmp ax,'o'
-         je change 
-         cmp ax,'a'
-         je change
-         
-         cont:
-            stosb
-         push ECX
-         invoke dwtoa, eax, addr Str2
-         invoke StdOut, addr Str2
-         pop ECX
-    loop loop_find
-                        
-        ;invoke StdOut,addr Str1
+    lea ebx,e
+    push ebx        ; push ebx ))))))
+    lea ebx,Str1    ;ptr to smth string 
+    push ebx
+    lea ebx,vawelsarr
+    push ebx
 jmp Finish
 
 change: 
@@ -198,10 +177,11 @@ cycle1:
     
          jmp Finish
 %endif     
-     
+     ; Den is bitch ))
 PrintArr:
         xor EAX, EAX
-        mov ECX, 8             ; 2 columns
+        push ecx
+        mov ECX, 4             ; 2 columns
 cycle:
         push ECX
         push EBX
@@ -220,8 +200,9 @@ cycle:
         Invoke StdOut, ADDR nextstring              ;using it as /n
         pop Count
         dec Count
-        mov ECX, Count
-        loop PrintArr:
+        ;mov ECX, Count
+        pop ecx
+        loop PrintArr
         
 Finish:         
          ; Output

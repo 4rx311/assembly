@@ -34,7 +34,7 @@ E SDWORD 16 dup (?)
 Arr SDWORD  2,5,4,2,3,7,6,3
 Count DWORD 4
 
-nextstring  DB 13,10,0
+nextstring  DB ' ', 13,10,0
 
 public  B, S, D, E, Arr
 
@@ -201,7 +201,7 @@ cycle1:
      
 PrintArr:
         xor EAX, EAX
-        mov ECX, 8             ; 2 columns
+        mov ECX, 4             ; 2 columns
 cycle:
         push ECX
         push EBX
@@ -221,6 +221,7 @@ cycle:
         pop Count
         dec Count
         mov ECX, Count
+        loop PrintArr
         
 Finish:         
          ; Output

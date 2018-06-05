@@ -24,6 +24,7 @@ buffer  DB 10 dup ('0')
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
 Str1    byte 'killallvowels!',13,10,0
+vowelsarr byte 'eyuioa'
 Str2    byte 14 dup (?)
 
 B SDWORD 5
@@ -105,41 +106,14 @@ Case3:;----------------------------------------------
          jmp Finish        
         
 Case4:;----------------------------------------------
-         mov ECX,13
-         cld
-         lea ESI,Str1
-         lea EDI,E
-         
-loop_find:  
-         lodsb
-         cmp ax,'e'
-         je change
-         cmp ax,'y'
-         je change
-         cmp ax,'u'
-         je change
-         cmp ax,'i'
-         je change
-         cmp ax,'o'
-         je change 
-         cmp ax,'a'
-         je change
-         
-         cont:
-            stosb
-         push ECX
-         invoke dwtoa, eax, addr Str2
-         invoke StdOut, addr Str2
-         pop ECX
-    loop loop_find
-                        
-        ;invoke StdOut,addr Str1
+    lea ebx,E
+    push ebx        ; push ebx ))))))
+    lea ebx,Str1    ;ptr to smth string 
+    push ebx
+    lea ebx,vowelsarr
+    push ebx
 jmp Finish
 
-change: 
-        mov ax,'-'
-        ;stosb
-        jmp cont 
                                                                                                                             
 CaseN:;----------------------------------------------                  
 %ifdef            

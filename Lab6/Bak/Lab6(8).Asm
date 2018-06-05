@@ -201,7 +201,7 @@ cycle1:
      
 PrintArr:
         xor EAX, EAX
-        mov ECX, 8             ; 2 columns
+        mov ECX, 2             ; 2 columns
 cycle:
         push ECX
         push EBX
@@ -221,6 +221,7 @@ cycle:
         pop Count
         dec Count
         mov ECX, Count
+        loop PrintArr
         
 Finish:         
          ; Output

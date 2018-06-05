@@ -11,7 +11,7 @@ IncludeLib masm32.lib
 
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 .CONST
-MsgExit  DB    "Press Enter to Exit",0AH,0DH,0
+MsgExit DB    "Press Enter to Exit",0AH,0DH,0
 string1 DB 10 dup (?)         ; Text values
 string2 DB ' ',13,10,0
 
@@ -32,9 +32,9 @@ D SDWORD 4
 E SDWORD 16 dup (?)
 
 Arr SDWORD  2,5,4,2,3,7,6,3
-Count DWORD 8
+Count DWORD 4
 
-
+nextstring  DB 13,10,0
 
 public  B, S, D, E, Arr
 
@@ -54,14 +54,14 @@ Tabl DWORD 2 dup (?)
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          .CODE
 Start:
- %ifdef        ;Input
+        ;Input
          Invoke StdOut,ADDR reqIN
          Invoke StdIn,ADDR buffer,LengthOf buffer
          Invoke StripLF,ADDR buffer           
          Invoke atol, ADDR buffer
          mov A, EAX  
- %endif
-            mov A,2        
+
+         ;mov A,2        
          ;Switch
          cmp A, 1
          je Case1
@@ -89,7 +89,7 @@ Case2:;----------------------------------------------
          call Mod2
          mov eax,E
          mov ebx,0
-         jmp print_mas
+         jmp PrintArr
          jmp Finish
 
 Case3:;----------------------------------------------
@@ -172,31 +172,60 @@ testend:                    ; test end of string
          ;call Mod4
 %endif
 
-;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         
-print_mas:  mov ECX,2;Becausr we have 2 strings
-            
-            cycle1: push ECX
-                    mov ECX,4    ; Because in 1 string we have 4 valuations
-                    push ECX
-                    
-                    mov EAX,E[EBX*4]
-                    push EBX
-                    invoke dwtoa,EAX,addr string1
-                    invoke StdOut,addr string1
-                    pop ebx
-                    inc ebx
-                    pop ecx
-                loop cycle1
-           
-           pop ecx
-           invoke StdOut,addr string2
-           loop print_mas
-           jmp Finish
 
-Finish:
-         
+;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+%ifdef        
+print_mas:                      ; Oleg's shit  
+         mov ECX,2              ; Bcs we have 2 columns
+            
+cycle1:
+```````  push ECX
+         mov ECX,4              ; Because in 1 string we have 4 valuations
+         push ECX
+                    
+         mov EAX,E[EBX*4]
+         push EBX
+         invoke dwtoa,EAX,addr string1
+         invoke StdOut,addr string1
+         pop ebx
+         inc ebx
+         pop ecx
+    loop cycle1
+           
+         pop ecx
+         invoke StdOut,addr string2
+    loop print_mas
+    
+         jmp Finish
+%endif     
+     
+PrintArr:
+        xor EAX, EAX
+        mov ECX, 8             ; 2 columns
+cycle:
+        push ECX
+        push EBX
+        
+        mov EAX, Arr[EBX*4]
+        
+        Invoke dwtoa, EAX, ADDR E
+        Invoke StdOut,ADDR E
+      
+        pop EBX
+        inc EBX
+        pop ECX
+    loop cycle
+    
+        push Count
+        Invoke StdOut, ADDR nextstring
+        pop Count
+        dec Count
+        mov ECX, Count
+        
+Finish:         
          ; Output
          ;Invoke dwtoa,E,ADDR resstr
+         ;Invoke StdOut, ADDR resstr
          
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          XOR    EAX,EAX

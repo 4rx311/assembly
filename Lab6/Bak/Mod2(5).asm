@@ -13,16 +13,16 @@ Mod2 PROC C
     push EDI
     %endif
     
+    ;invoke dwtoa, eax, addr Str2
     mov ECX, 4          ; count
-    ;mov ESI,[EBX]       ; Arr address
-    ;mov EDI,[EBX+4]     ; E address
-    lea esi,[ebx]
-    lea edi,[ebx+4]
+    mov ESI,[EBX]       ; Arr address
+    mov EDI,[EBX+4]     ; E address
     
-    loop1: movsd
-    loop loop1
+    rep movsd
     
-    ;rep movsd
+    ;mov edx,[EBX]
+    ;mov [EBX],[EBX+4]
+    ;mov [EBX],edx
 
     %ifdef   ;Restoring registers
     pop EAX
@@ -31,4 +31,5 @@ Mod2 PROC C
     pop EDI
     %endif
 Mod2 endp
+ret
 end

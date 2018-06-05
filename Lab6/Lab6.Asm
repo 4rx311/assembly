@@ -34,7 +34,7 @@ E SDWORD 16 dup (?)
 Arr SDWORD  2,5,4,2,3,7,6,3
 Count DWORD 4
 
-nextstring  DB 13,10,0
+nextstring  DB ' ', 13,10,0
 
 public  B, S, D, E, Arr
 
@@ -89,6 +89,7 @@ Case2:;----------------------------------------------
          call Mod2
          mov eax,E
          mov ebx,0
+         mov ecx,2
          jmp PrintArr
          jmp Finish
 
@@ -198,10 +199,11 @@ cycle1:
     
          jmp Finish
 %endif     
-     
+     ; Den is bitch ))
 PrintArr:
         xor EAX, EAX
-        mov ECX, 8             ; 2 columns
+        push ecx
+        mov ECX, 4             ; 2 columns
 cycle:
         push ECX
         push EBX
@@ -220,7 +222,9 @@ cycle:
         Invoke StdOut, ADDR nextstring              ;using it as /n
         pop Count
         dec Count
-        mov ECX, Count
+        ;mov ECX, Count
+        pop ecx
+        loop PrintArr
         
 Finish:         
          ; Output

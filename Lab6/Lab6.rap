@@ -79,7 +79,7 @@ MilestoneOnTime=2
 MilestoneOnDate=0
 MilestoneOnDateWhen=1
 MilestoneOnDateStatus=0
-MilestoneOnDateDate=5
+MilestoneOnDateDate=6
 MilestoneOnDateTimeYear=2018
 MilestoneOnDateTimeMonth=5
 MilestoneOnDateTimeDate=31
@@ -118,11 +118,11 @@ ProductVer4Range=0
 1004=
 1003=
 [Size]
-1=0,2,883,832,3297
+1=0,2,883,788,3297
 1001=410,4,516,647,221
 3=
-1002=270,51,586,586,229
-1004=127,218,482,555,46
+1002=499,41,586,586,1523
+1004=619,66,482,555,121
 1003=838,8,535,555,81
 [BookMark]
 0=
@@ -138,5 +138,6 @@ ProductVer4Range=0
 [BreakPoint]
 0=
 [Find]
-1="E"
-2="str1"
+1="count"
+2="E"
+3="str1"

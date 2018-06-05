@@ -18,9 +18,9 @@ Mod2 PROC C
     ;mov ESI,[EBX]       ; Arr address
     ;mov EDI,[EBX+4]     ; E address
     
-    mov edx,[EBX]
-    mov [EBX],[EBX+4]
-    mov [EBX],edx
+    ;mov edx,[EBX]
+    ;mov [EBX],[EBX+4]
+    ;mov [EBX],edx
 
     %ifdef   ;Restoring registers
     pop EAX

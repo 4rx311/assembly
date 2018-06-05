@@ -14,13 +14,13 @@ Mod2 PROC C
     %endif
     
     ;invoke dwtoa, eax, addr Str2
-    mov ECX, 4          ; count
-    mov ESI,[EBX]       ; Arr address
-    mov EDI,[EBX+4]     ; E address
+    ;mov ECX, 4          ; count
+    ;mov ESI,[EBX]       ; Arr address
+    ;mov EDI,[EBX+4]     ; E address
     
-    mov edx,[esi]
-    mov [esi],[edi]
-    mov [edi],edx
+    mov edx,[EBX]
+    mov [EBX],[EBX+4]
+    mov [EBX],edx
 
     %ifdef   ;Restoring registers
     pop EAX

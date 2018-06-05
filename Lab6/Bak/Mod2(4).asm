@@ -14,14 +14,15 @@ Mod2 PROC C
     %endif
     
     ;invoke dwtoa, eax, addr Str2
-    %ifdef
+    ;%ifdef
     mov ECX, 4          ; count
     mov ESI,[EBX]       ; Arr address
     mov EDI,[EBX+4]     ; E address
     
     rep movsd
-    %endif
+    ;%endif
     
+    %ifdef
     ;Duplication of array
     xor EAX, EAX
     mov ESI, [EBX + 4]      ;ESI = Arr adress
@@ -42,6 +43,7 @@ Mod2 PROC C
     mov edx,[EBX]
     mov [EBX],[EBX+4]
     mov [EBX],edx
+    %endif
 
     %ifdef   ;Restoring registers
     pop EAX

@@ -34,7 +34,7 @@ E SDWORD 16 dup (?)
 Arr SDWORD  2,5,4,2,3,7,6,3
 Count DWORD 4
 
-nextstring  DB 13,10,0
+nextstring  DB ' ', 13,10,0
 
 public  B, S, D, E, Arr
 
@@ -217,10 +217,11 @@ cycle:
     loop cycle
     
         push Count
-        Invoke StdOut, ADDR nextstring
+        Invoke StdOut, ADDR nextstring              ;using it as /n
         pop Count
         dec Count
         mov ECX, Count
+        loop PrintArr:
         
 Finish:         
          ; Output

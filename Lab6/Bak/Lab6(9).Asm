@@ -23,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1     byte 'Killallvowels!',13,10,0
+Str1     byte 'killallvowels!',13,10,0
 Str2    byte 14 dup (?)
 
 B SDWORD 5
@@ -181,7 +181,7 @@ print_mas:  mov ECX,2;Becausr we have 2 strings
                     
                     mov EAX,E[EBX*4]
                     push EBX
-                    ;invoke dwtoa,EAX,addr string1
+                    invoke dwtoa,EAX,addr string1
                     invoke StdOut,addr string1
                     pop ebx
                     inc ebx

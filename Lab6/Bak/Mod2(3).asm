@@ -14,21 +14,16 @@ Mod2 PROC C
     %endif
     
     mov ECX, 4          ; count
-    ;mov ESI,[EBX]       ; Arr address
-    ;mov EDI,[EBX+4]     ; E address
-    lea esi,[ebx]
-    lea edi,[ebx+4]
+    mov ESI,[EBX]       ; Arr address
+    mov EDI,[EBX+4]     ; E address
     
-    loop1: movsd
-    loop loop1
-    
-    ;rep movsd
+    rep movsd
 
- %ifdef   ;Restoring registers
+    %ifdef   ;Restoring registers
     pop EAX
     pop ECX
     pop ESI
     pop EDI
-%endif
+    %endif
 Mod2 endp
 end

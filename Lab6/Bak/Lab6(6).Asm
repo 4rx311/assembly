@@ -23,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1     byte '122illallvowels!',13,10,0
+Str1    byte 'killallvowels!',13,10,0
 Str2    byte 14 dup (?)
 
 B SDWORD 5
@@ -61,7 +61,7 @@ Start:
          Invoke atol, ADDR buffer
          mov A, EAX  
  %endif
-            mov A,4        
+            mov A,2        
          ;Switch
          cmp A, 1
          je Case1

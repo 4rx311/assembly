@@ -23,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1     byte 'Killallvowels!',13,10,0
+Str1    byte 'killallvowels!',13,10,0
 Str2    byte 14 dup (?)
 
 B SDWORD 5
@@ -171,7 +171,7 @@ testend:                    ; test end of string
          
          ;call Mod4
 %endif
-invoke StdOut,addr E
+
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         
 print_mas:  mov ECX,2;Becausr we have 2 strings
             

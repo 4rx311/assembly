@@ -7,7 +7,7 @@ extern S:SDWORD, B:SDWORD, E:SDWORD
 .CODE
 Mod3 PROC C
 
-    push EBP
+    push EBP                ; Prolog
     mov EBP, ESP
     pusha
     
@@ -23,9 +23,9 @@ Mod3 PROC C
     
     mov [EDI], EAX          
     popa
-    mov ESP, EBP
+    mov ESP, EBP            ; Epilog
     pop EBP
-    ret 6
+    ret 12                   ; return from proc
 
 Mod3 endp
 end

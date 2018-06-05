@@ -6,14 +6,14 @@ extern S:SDWORD, B:SDWORD, E:SDWORD
 
 .CODE
 Mod3 PROC C
-
+%ifdef
     push EBP                ; Prolog
     mov EBP, ESP
     pusha
     
     xor EAX, EAX
-    mov ECX, [EBP + 16]
-    mov EDX, [EBP + 12]
+    ;mov ECX, [EBP + 16]
+    ;mov EDX, [EBP + 12]
     mov ESI, [EBP + 8]      ; Arr address
     mov EDI, [EBP + 4]      ; E address
     
@@ -26,6 +26,9 @@ Mod3 PROC C
     mov ESP, EBP            ; Epilog
     pop EBP
     ret 12                   ; return from proc
-
+%endif
+add eax,ebx
+add eax,ecx
 Mod3 endp
+ret
 end

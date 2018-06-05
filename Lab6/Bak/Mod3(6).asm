@@ -25,7 +25,6 @@ Mod3 PROC C
     popa
     mov ESP, EBP            ; Epilog
     pop EBP
-    ret 6                   ; return from proc
+    ret 12                   ; return from proc
 
 Mod3 endp
-end

@@ -54,14 +54,14 @@ Tabl DWORD 2 dup (?)
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          .CODE
 Start:
- %ifdef        ;Input
+        ;Input
          Invoke StdOut,ADDR reqIN
          Invoke StdIn,ADDR buffer,LengthOf buffer
          Invoke StripLF,ADDR buffer           
          Invoke atol, ADDR buffer
          mov A, EAX  
- %endif
-            mov A,4        
+
+         ;mov A,2        
          ;Switch
          cmp A, 1
          je Case1
@@ -172,6 +172,7 @@ testend:                    ; test end of string
          ;call Mod4
 %endif
 
+Finish:
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         
 print_mas:  mov ECX,2;Becausr we have 2 strings
             
@@ -192,11 +193,9 @@ print_mas:  mov ECX,2;Becausr we have 2 strings
            invoke StdOut,addr string2
            loop print_mas
            jmp Finish
-
-Finish:
          
          ; Output
-         ;Invoke dwtoa,E,ADDR resstr
+         Invoke dwtoa,E,ADDR resstr
          
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          XOR    EAX,EAX

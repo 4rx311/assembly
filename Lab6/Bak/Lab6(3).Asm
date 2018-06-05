@@ -54,14 +54,14 @@ Tabl DWORD 2 dup (?)
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          .CODE
 Start:
- %ifdef        ;Input
+        ;Input
          Invoke StdOut,ADDR reqIN
          Invoke StdIn,ADDR buffer,LengthOf buffer
          Invoke StripLF,ADDR buffer           
          Invoke atol, ADDR buffer
          mov A, EAX  
- %endif
-            mov A,4        
+
+         ;mov A,2        
          ;Switch
          cmp A, 1
          je Case1

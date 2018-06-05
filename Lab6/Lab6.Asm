@@ -172,6 +172,7 @@ testend:                    ; test end of string
          ;call Mod4
 %endif
 
+
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>         
 print_mas:  mov ECX,2;Becausr we have 2 strings
             
@@ -193,10 +194,10 @@ print_mas:  mov ECX,2;Becausr we have 2 strings
            loop print_mas
            jmp Finish
 
-Finish:
-         
+Finish:         
          ; Output
-         ;Invoke dwtoa,E,ADDR resstr
+         Invoke dwtoa,E,ADDR resstr
+         Invoke StdOut, ADDR resstr
          
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          XOR    EAX,EAX

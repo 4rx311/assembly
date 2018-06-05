@@ -23,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1     byte 'killallvowels!',13,10,0
+Str1    byte 'killallvowels!',13,10,0
 Str2    byte 14 dup (?)
 
 B SDWORD 5
@@ -31,7 +31,7 @@ S SDWORD 2
 D SDWORD 4
 E SDWORD 16 dup (?)
 
-Arr SDWORD  2,5,4,2,3,7,6,3
+Arr SDWORD  2,5,4,2,0,7,6,9
 Count DWORD 8
 
 
@@ -54,14 +54,14 @@ Tabl DWORD 2 dup (?)
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          .CODE
 Start:
- %ifdef        ;Input
+        ;Input
          Invoke StdOut,ADDR reqIN
          Invoke StdIn,ADDR buffer,LengthOf buffer
          Invoke StripLF,ADDR buffer           
          Invoke atol, ADDR buffer
          mov A, EAX  
- %endif
-            mov A,4        
+
+         ;mov A,2        
          ;Switch
          cmp A, 1
          je Case1

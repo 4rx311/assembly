@@ -12,8 +12,8 @@ Mod3 PROC C
     pusha
     
     xor EAX, EAX
-    mov ECX, [EBP + 16]
-    mov EDX, [EBP + 12]
+    ;mov ECX, [EBP + 16]
+    ;mov EDX, [EBP + 12]
     mov ESI, [EBP + 8]      ; Arr address
     mov EDI, [EBP + 4]      ; E address
     
@@ -28,3 +28,4 @@ Mod3 PROC C
     ret 12                   ; return from proc
 
 Mod3 endp
+end

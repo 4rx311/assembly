@@ -22,8 +22,7 @@ Mod1 PROC C
     mov ECX, D
     
 Cycle:
-    mov EAX, E
-    imul EAX
+    imul E
   loop Cycle
     
     mov E, EAX

@@ -5,7 +5,7 @@ OPTION CASEMAP:NONE
 extern S:SDWORD, B:SDWORD, D:SDWORD, E:SDWORD
 
 .CODE
-Mod1 PROC
+Mod1 PROC c
     ; B + S + 1
     mov EAX, B
     add EAX, S

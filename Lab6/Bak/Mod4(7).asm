@@ -19,7 +19,7 @@ cycle1: mov edi,[ebp+12]    ;mother points to string
                     je change
                     loop compare
                     jmp fin_compare
-        change:     mov bh,42
+        change:     mov bh,43
                     mov 0[edi-1],bh
                     dec ecx
                     jcxz fin_compare    ;переход по нулю

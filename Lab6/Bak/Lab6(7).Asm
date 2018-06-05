@@ -23,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1    byte 'killallvowels!',13,10,0
+Str1    byte 'killallvowels!',0
 vowelsarr byte 'eyuioa'
 Str2    byte 14 dup (?)
 
@@ -52,8 +52,8 @@ A SDWORD ?
 
 Tabl DWORD 2 dup (?)
 
-;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-         .CODE
+;>>>>>>>>>>>>>>>>>>>>>>CODE>>>>>>>>>>>>>>>>>>>>>>>>>>>
+.CODE
 Start:
         ;Input
          Invoke StdOut,ADDR reqIN
@@ -61,9 +61,8 @@ Start:
          Invoke StripLF,ADDR buffer           
          Invoke atol, ADDR buffer
          mov A, EAX  
-
-         ;mov A,2        
-         ;Switch
+       
+  ;Switch
          cmp A, 1
          je Case1
          cmp A, 2
@@ -96,88 +95,29 @@ Case2:;----------------------------------------------
 
 Case3:;----------------------------------------------
          xor EAX, EAX
-         mov edx,4           ; we know that it is 5 elements
+         mov edx,4          ; we know that there is 5 elements
          mov eax,Arr[edx*4]
          mov ebx,B
          mov ecx,S
          call Mod3
          mov E,EAX
-         
          jmp Finish        
         
 Case4:;----------------------------------------------
-    lea ebx,E
-    push ebx        ; push ebx ))))))
-    lea ebx,Str1    ;ptr to smth string 
-    push ebx
-    lea ebx,vowelsarr
-    push ebx
-jmp Finish1
-
+         lea ebx,E               ; result string address
+         push ebx        
+         lea ebx,Str1            ; our string address 
+         push ebx
+         lea ebx,vowelsarr       ; string of vowels address
+         push ebx
+         call Mod4
+         jmp FinishAlt
                                                                                                                             
-CaseN:;----------------------------------------------                  
-%ifdef            
-         xor EAX, EAX
-         lea ESI, Str1      ; our string address
-         lea EDI, E         ; result string address
-
-compare:                    
-         cmpsb              ; compare byte from ESI, with byte from EDI
-         je check           ; if true -> state3
-         mov EAX, [ESI+4]   ; else, write to result
-         mov [EDI+4], EAX
-         jmp testend
-         
-increm:  
-         inc ESI            ; ESI ++ - moving to the next 
-         invoke StdOut,addr Str1
-check:   
-         mov EAX, [ESI]
-         cmp EAX, 'a'
-         je increm
-    
-
-testend:                    ; test end of string
-         mov EAX, [ESI+4]
-         cmp EAX, '!'
-         je Finish
-         jmp compare
-         
-         
-         ;call Mod4
-%endif
-
-
-;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
-%ifdef        
-print_mas:                      ; Oleg's shit  
-         mov ECX,2              ; Bcs we have 2 columns
-            
-cycle1:
-```````  push ECX
-         mov ECX,4              ; Because in 1 string we have 4 valuations
-         push ECX
-                    
-         mov EAX,E[EBX*4]
-         push EBX
-         invoke dwtoa,EAX,addr string1
-         invoke StdOut,addr string1
-         pop ebx
-         inc ebx
-         pop ecx
-    loop cycle1
-           
-         pop ecx
-         invoke StdOut,addr string2
-    loop print_mas
-    
-         jmp Finish
-%endif     
-     ; Den is bitch ))
+;>>>>>>>>>>>>>>>>>>>>>>Output>>>>>>>>>>>>>>>>>>>>>>>>
 PrintArr:
         xor EAX, EAX
         push ecx
-        mov ECX, 4             ; 2 columns
+        mov ECX, 4          ; 2 columns
 cycle:
         push ECX
         push EBX
@@ -193,22 +133,22 @@ cycle:
     loop cycle
     
         push Count
-        Invoke StdOut, ADDR nextstring              ;using it as /n
+        Invoke StdOut, ADDR nextstring        ; using it as /n
         pop Count
         dec Count
-        ;mov ECX, Count
         pop ecx
         loop PrintArr
         
-Finish1:    Invoke StdOut,ADDR E
-            jmp Finish        
+FinishAlt:
+        Invoke StdOut,ADDR E
+        jmp Exit        
         
 Finish:         
-         ; Output
-         Invoke dwtoa,E,ADDR resstr
-         Invoke StdOut, ADDR resstr
-         
-;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        Invoke dwtoa,E,ADDR resstr
+        Invoke StdOut, ADDR resstr
+      
+;>>>>>>>>>>>>>>>>>>>>>>>>Exit>>>>>>>>>>>>>>>>>>>>>>>>
+Exit:   
          XOR    EAX,EAX
          Invoke StdOut,ADDR MsgExit
          Invoke StdIn,ADDR inbuf,LengthOf inbuf		

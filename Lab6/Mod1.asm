@@ -27,7 +27,6 @@ Cycle:
   loop Cycle
     
     mov E, EAX
-    
     ret
 
 Mod1 endp

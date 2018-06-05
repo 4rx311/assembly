@@ -23,7 +23,7 @@ reqIN   DB 'Choose betwee 1-4: ', 13, 10, 0
 buffer  DB 10 dup ('0')  
 reqOUT  DB 13,10,'Result E = '
 resstr  DB 16 dup (2,7,6,5,2)
-Str1    byte 'killallvowels!',13,10,0
+Str1    byte 'killallvowels!',0
 vowelsarr byte 'eyuioa'
 Str2    byte 14 dup (?)
 
@@ -112,6 +112,7 @@ Case4:;----------------------------------------------
     push ebx
     lea ebx,vowelsarr
     push ebx
+    call Mod4
 jmp Finish1
 
                                                                                                                             
@@ -144,7 +145,7 @@ testend:                    ; test end of string
          jmp compare
          
          
-         ;call Mod4
+         call Mod4
 %endif
 
 
@@ -173,7 +174,7 @@ cycle1:
     
          jmp Finish
 %endif     
-     ; Den is bitch ))
+     ; Den is a bitch ))
 PrintArr:
         xor EAX, EAX
         push ecx
@@ -196,19 +197,20 @@ cycle:
         Invoke StdOut, ADDR nextstring              ;using it as /n
         pop Count
         dec Count
-        ;mov ECX, Count
         pop ecx
         loop PrintArr
         
-Finish1:    Invoke StdOut,ADDR E
-            jmp Finish        
+Finish1:
+        Invoke StdOut,ADDR E
+        jmp Exit        
         
 Finish:         
-         ; Output
-         ;Invoke dwtoa,E,ADDR resstr
-         ;Invoke StdOut, ADDR resstr
-         
+        ; Output
+        Invoke dwtoa,E,ADDR resstr
+        Invoke StdOut, ADDR resstr
+      
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Exit:   
          XOR    EAX,EAX
          Invoke StdOut,ADDR MsgExit
          Invoke StdIn,ADDR inbuf,LengthOf inbuf		

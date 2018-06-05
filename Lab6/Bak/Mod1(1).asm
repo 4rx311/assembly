@@ -20,6 +20,7 @@ Mod1 PROC C
     
     mov E, EAX
     mov ECX, D
+    dec ECX
     
 Cycle:
     imul E

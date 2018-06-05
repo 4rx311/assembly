@@ -19,9 +19,9 @@ Mod1 PROC C
     idiv EBX
     
     mov E, EAX
-      mov ECX, D
+    mov ECX, D
+    
 Cycle:
-  
     mov EAX, E
     imul EAX
   loop Cycle

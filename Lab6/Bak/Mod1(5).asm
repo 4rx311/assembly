@@ -15,6 +15,7 @@ Mod1 PROC C
     mov EBX, B 
     sub EBX, S
     dec EBX
+    cdq
     idiv EBX
     
     mov E, EAX

@@ -23,7 +23,7 @@ Cycle:
     mov ECX, D
     mov EAX, E
     imul EAX
-  loop Cecle
+  loop Cycle
     
     mov E, EAX
     

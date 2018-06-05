@@ -28,14 +28,14 @@ cycle1: mov edi,[ebp+12]    ;mother points to string
                         inc esi                  
         loop cycle1
         
-mov ecx,15
+mov ecx,14
 mov esi,[ebp+12]
 mov edi,[ebp+16]
 rep movsb
 
      mov esp,ebp
      pop ebp 
-     ret 14
+     ret 12
         
 Mod4 endp
 end

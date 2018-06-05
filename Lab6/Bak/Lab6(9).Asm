@@ -112,7 +112,7 @@ Case4:;----------------------------------------------
     push ebx
     lea ebx,vowelsarr
     push ebx
-jmp Finish
+jmp Finish1
 
                                                                                                                             
 CaseN:;----------------------------------------------                  
@@ -200,11 +200,13 @@ cycle:
         pop ecx
         loop PrintArr
         
+Finish1:    Invoke StdOut,ADDR E
+            jmp Finish        
+        
 Finish:         
          ; Output
          ;Invoke dwtoa,E,ADDR resstr
          ;Invoke StdOut, ADDR resstr
-         invoke StdOut, addr E
          
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          XOR    EAX,EAX

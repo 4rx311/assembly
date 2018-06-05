@@ -113,7 +113,7 @@ Case4:;----------------------------------------------
     lea ebx,vowelsarr
     push ebx
     call Mod4
-jmp Finish1
+jmp Finish
 
                                                                                                                             
 CaseN:;----------------------------------------------                  

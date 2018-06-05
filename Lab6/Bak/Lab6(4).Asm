@@ -206,8 +206,8 @@ Finish1:    Invoke StdOut,ADDR E
         
 Finish:         
          ; Output
-         Invoke dwtoa,E,ADDR resstr
-         Invoke StdOut, ADDR resstr
+         ;Invoke dwtoa,E,ADDR resstr
+         ;Invoke StdOut, ADDR resstr
          
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
          XOR    EAX,EAX

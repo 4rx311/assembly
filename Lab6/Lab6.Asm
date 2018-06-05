@@ -145,7 +145,7 @@ testend:                    ; test end of string
          jmp compare
          
          
-         ;call Mod4
+         call Mod4
 %endif
 
 
@@ -174,7 +174,7 @@ cycle1:
     
          jmp Finish
 %endif     
-     ; Den is bitch ))
+     ; Den is a bitch ))
 PrintArr:
         xor EAX, EAX
         push ecx
@@ -197,19 +197,20 @@ cycle:
         Invoke StdOut, ADDR nextstring              ;using it as /n
         pop Count
         dec Count
-        ;mov ECX, Count
         pop ecx
         loop PrintArr
         
-Finish1:    Invoke StdOut,ADDR E
-            jmp Finish        
+Finish1:
+        Invoke StdOut,ADDR E
+        jmp Exit        
         
 Finish:         
-         ; Output
-         Invoke dwtoa,E,ADDR resstr
-         Invoke StdOut, ADDR resstr
-         
+        ; Output
+        Invoke dwtoa,E,ADDR resstr
+        Invoke StdOut, ADDR resstr
+      
 ;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Exit:   
          XOR    EAX,EAX
          Invoke StdOut,ADDR MsgExit
          Invoke StdIn,ADDR inbuf,LengthOf inbuf		

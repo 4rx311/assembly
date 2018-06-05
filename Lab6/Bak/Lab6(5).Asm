@@ -112,6 +112,7 @@ Case4:;----------------------------------------------
     push ebx
     lea ebx,vowelsarr
     push ebx
+    call Mod4
 jmp Finish1
 
                                                                                                                             
